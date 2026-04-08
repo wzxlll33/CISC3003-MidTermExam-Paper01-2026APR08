@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f0f2f5;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 28px;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 15px 0;
+    color: #fff;
+}
+
+span {
+    font-size: 13px;
+    color: #666;
+    margin: 10px 0;
+}
+
+button {
+    border-radius: 25px;
+    border: none;
+    padding: 12px 45px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+.btn-primary {
+    background-color: #2b7fff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #1a6fd9;
+}
+
+.ghost-btn {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.ghost-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+form {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+input {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    font-size: 14px;
+    outline: none;
+}
+
+input::placeholder {
+    color: #999;
+}
+
+.social-container {
+    margin: 15px 0;
+}
+
+.social-container a {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.social-container a:hover {
+    background-color: #f0f0f0;
+    border-color: #2b7fff;
+    color: #2b7fff;
+}
+
+/* ========== 主容器 ========== */
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+/* ========== 表单容器 ========== */
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transition: all 0.6s ease-in-out;
+}
+
+/* Sign Up 在左侧 */
+.sign-up-container {
+    left: 0;
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Sign In 在右侧（初始隐藏在后面） */
+.sign-in-container {
+    left: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* ========== 切换到右侧面板（显示 Sign In） ========== */
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.right-panel-active .sign-in-container {
+    transform: translateX(-100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+@keyframes show {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+/* ========== 遮罩层 ========== */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.overlay {
+    background: #2b7fff;
+    background: linear-gradient(135deg, #2b7fff 0%, #1a6fd9 100%);
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+    left: 0;
+    transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+.image-box {
+    width: 120px;
+    height: 120px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 15px;
+    z-index: 999;
+}
+
+footer p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        min-height: 600px;
+    }
+    
+    .form-container {
+        width: 100%;
+    }
+    
+    .sign-up-container,
+    .sign-in-container {
+        width: 100%;
+    }
+    
+    .overlay-container {
+        display: none;
+    }
+}
